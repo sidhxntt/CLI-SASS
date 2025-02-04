@@ -1,0 +1,51 @@
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:siddhantgupta@host.docker.internal:5432/OVERALL_BACKEND
+      - REDIS_HOST=host.docker.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - app-network
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - app-network
+    depends_on:
+      - app
+
+  grafana-loki:
+    image: grafana/loki
+    ports:
+      - "3100:3100"
+    networks:
+      - app-network
+    depends_on:
+      - app
+
+  grafana:
+    image: grafana/grafana-oss
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on:
+      - prometheus
+      - grafana-loki
+
+
+networks:
+  app-network:
+    driver: bridge
