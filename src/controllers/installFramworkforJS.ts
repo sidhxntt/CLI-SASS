@@ -27,7 +27,9 @@ async function installFramworkforJS(packageName: string | unknown, projectName: 
           p.note(`Next steps:
             1. cd ${projectName}/ts-postgres-template
             2. npm install
-            3. Checkout README.md for manual`);
+            3. Checkout README.md for manual
+
+            HAPPY CODING ✨✨`);
         } else {
           p.log.error(color.red("There was an error during installation."));
         }

@@ -7,7 +7,7 @@ import { cancelOperation_onlyforProjectName } from "./utils/cancelOperation";
 
 
 async function main() {
-  p.intro(String(color.bgMagenta(color.black(`Example CLI -2`))));
+  p.intro(String(color.bgMagenta(color.black(`Welcome to CodeRush 🚀`))));
 
   process.on("SIGINT", () => {
     cancelOperation_onlyforProjectName();
