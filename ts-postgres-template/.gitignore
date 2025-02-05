@@ -35,6 +35,3 @@ out/
 # IDE specific files
 .vscode/
 .idea/
-
-# Environment variables
-.env
