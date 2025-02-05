@@ -1,22 +1,22 @@
+// Code to connect and disconnect from the database using PrismaClient
 import { PrismaClient } from "@prisma/client";
-import logger from "./Loki";
 
 export const prisma = new PrismaClient();
 
 export const connectDB = async () => {
   try {
     await prisma.$connect();
-    logger.info("Successfully connected to database 🎯");
+    console.info("Successfully connected to database 🎯");
   } catch (error: any) {
-    logger.error("Error connecting to database:", error.message || error);
+    console.error("Error connecting to database:", error.message || error);
   }
 };
 
 export const disconnectDB = async () => {
   try {
     await prisma.$disconnect();
-    logger.info("Successfully disconnected from database 🎯");
+    console.info("Successfully disconnected from database 🙌");
   } catch (error: any) {
-    logger.error("Failed to disconnect from database:", error.message || error);
+    console.error("Failed to disconnect from database:", error.message || error);
   }
 };

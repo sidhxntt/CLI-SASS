@@ -4,12 +4,12 @@
   "main": "server.ts",
   "license": "MIT",
   "scripts": {
-    "dev:server": "prisma generate && nodemon --exec ts-node ./src/server.ts",
-    "seed": "ts-node prisma/seeding/*.ts",
+    "seed": "ts-node prisma/seeding/data.ts",
     "build": "tsc",
-    "prod:start": "node dist/server.js",
-    "prod:docker:start:pm2": "prisma generate && pm2-runtime start ecosystem.config.js",
-    "prod:start:pm2": "prisma generate && pm2 start ecosystem.config.js"
+    "dev:server": "prisma generate && nodemon --exec ts-node ./src/server.ts",
+    "dev:worker:email": "nodemon --exec ts-node ./src/utils/workers/email.ts",
+    "dev:worker:sms": "nodemon --exec ts-node ./src/utils/workers/sms.ts",
+    "prod:server": "prisma generate && pm2-runtime start ecosystem.config.js"
   },
   "dependencies": {
     "@aws-sdk/client-sns": "^3.731.1",
@@ -25,6 +25,7 @@
     "ioredis": "^5.4.1",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.16",
+    "pm2": "^5.4.3",
     "prom-client": "^15.1.3",
     "ts-node": "^10.9.2",
     "twilio": "^5.4.2",

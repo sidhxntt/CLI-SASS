@@ -1,3 +1,4 @@
+// Purpose: Handle all routes related to the todos endpoint.
 import { Router } from "express";
 import { SubRoutes } from "./Sub_Routes";
 import Data from "../utils/Data";

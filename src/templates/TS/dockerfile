@@ -5,9 +5,9 @@ WORKDIR /app
 COPY . .
 
 RUN npm install 
-RUN npm install -g pm2 
+RUN npm install -g pm2  
 RUN npm run build
 
 EXPOSE 8000
 
-CMD ["npm", "run", "prod:docker:start:pm2" ]
+CMD ["npm", "run", "prod:server" ]

@@ -1,3 +1,7 @@
+//  Usage: This file contains the class for API User. It contains methods for signup, login, and other user related operations. 
+// It extends the Data class and uses the PrismaClient instance for database operations. 
+// The class also contains methods for sending email and SMS notifications using Bull queues.
+
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import JWT from "../controllers/Authentication";
@@ -81,13 +85,13 @@ export default class User extends Data {
       email: process.env.SMTP_FROM,
       message: "New User added to API",
     });
-    console.info(`Added job to email queue. Email Job ID: ${emailJob.id}}`);
+    console.info(`Added job to email queue. Email Job ID: ${emailJob.id}`);
 
     const smsJob = await smsQueue.add("send-sms", {
       to: process.env.PHONE_NUMBER,
       message: "New User added to API",
     });
-    console.info(`Added job to email queue. SMS Job ID: ${smsJob.id}}`);
+    console.info(`Added job to email queue. SMS Job ID: ${smsJob.id}`);
 
 
     console.info("New Api user created");

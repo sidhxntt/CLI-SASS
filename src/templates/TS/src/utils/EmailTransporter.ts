@@ -1,3 +1,4 @@
+// This file is used to create a nodemailer transporter object that can be used to send emails.
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 dotenv.config();

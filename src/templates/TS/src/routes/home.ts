@@ -1,3 +1,4 @@
+// Desc: Home route to show the welcome message to the user
 import express, { Request, Response, NextFunction } from "express";
 const router = express.Router();
 

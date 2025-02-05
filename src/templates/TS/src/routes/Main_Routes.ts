@@ -1,3 +1,5 @@
+// Purpose: Main routes file to define all routes for the application. It imports all the sub-routes and initializes them.
+// This file is then imported in the server file to initialize all the routes.
 import { Application, Response, NextFunction } from "express";
 import users from "./users";
 import Api_user from "./API_user";

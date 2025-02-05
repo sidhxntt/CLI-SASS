@@ -1,3 +1,4 @@
+// Purpose: Generate a random secret key and hash it using SHA-256.
 import CryptoJS from 'crypto-js';
 
 // Generate a random secret key

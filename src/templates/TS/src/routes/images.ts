@@ -1,3 +1,4 @@
+// Desc: Images routes
 import { Router } from "express";
 import { SubRoutes } from "./Sub_Routes";
 import Data from "../utils/Data";

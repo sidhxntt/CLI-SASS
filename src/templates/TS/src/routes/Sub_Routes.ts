@@ -1,3 +1,5 @@
+// This file is used to create a sub route for the main route.
+// It contains a class that creates a router object and adds endpoints to it.
 import { Router, Request, Response, NextFunction } from "express";
 
 type HttpMethod = 'get' | 'post' | 'patch' | 'delete';

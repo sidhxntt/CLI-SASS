@@ -1,3 +1,4 @@
+// Init router and data controller for the address route 
 import { Router } from "express";
 import { SubRoutes } from "./Sub_Routes";
 import Data from "../utils/Data";

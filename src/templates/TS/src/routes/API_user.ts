@@ -1,3 +1,4 @@
+// Init router and user controller
 import { Router } from "express";
 import { SubRoutes } from "./Sub_Routes";
 import User from "../utils/API_User";

@@ -1,5 +1,5 @@
-import {client} from "../../src/utils/Client";
-const prisma = client.getPrisma()
+// Seed data for the database
+import {prisma} from "../../src/utils/Prisma"
 
 async function main() {
   try {
@@ -5619,8 +5619,13 @@ async function main() {
       },
     });
     console.log("Data Seeding successfull ✅");
+    process.exit(0);
   } catch (error) {
-    console.error("Error during seeding:", error);
+    if(error instanceof Error){
+      console.error("Error during seeding:", error.message);
+      process.exit(1);
+    }
+    console.log("Unexpected ERROR", error)
     process.exit(1);
   }
 }

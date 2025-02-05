@@ -1,3 +1,4 @@
+// Purpose: Middleware for authorisation checks
 import { Request, Response, NextFunction } from "express";
 
 interface AuthenticatedRequest extends Request {
@@ -8,12 +9,6 @@ interface AuthenticatedRequest extends Request {
 }
 
 export default class AUTH {
-  /**
-   * Middleware to check if user has admin role
-   * @param req - Express request object
-   * @param res - Express response object
-   * @param next - Express next function
-   */
   public static async checkAdmin(
     req: AuthenticatedRequest,
     res: Response,

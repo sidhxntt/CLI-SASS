@@ -1,3 +1,4 @@
+// Purpose: Rate limiter middleware for express
 import { rateLimit } from 'express-rate-limit'
 
 const limiter = rateLimit({

@@ -1,10 +1,9 @@
 // Purpose: Data class to handle CRUD operations on the database.
+
 import { Request, Response } from "express";
 import { redis_connection } from "./Redis";
-import logger from "./Loki";
 
 const redis = redis_connection();
-
 interface UserInput {
   name: string;
   username: string;
@@ -120,7 +119,7 @@ export default class Data {
     };
     await redis.setex(cacheKey, 3600, JSON.stringify(responseData));
 
-    logger.info("All Data fetched successfully");
+    console.info("All Data fetched successfully");
     return this.sendResponse(
       res,
       200,
@@ -141,7 +140,7 @@ export default class Data {
         "Invalid ID"
       );
     }
-
+    
     const cacheKey = this.generateCacheKey(id);
     const cachedData = await redis.get(cacheKey);
 
@@ -175,7 +174,7 @@ export default class Data {
       );
     }
     await redis.setex(cacheKey, 3600, JSON.stringify(user));
-    logger.info("Single Data fetched successfully");
+    console.info("Single Data fetched successfully");
     return this.sendResponse(res, 200, "User fetched successfully", user);
   }
 
@@ -226,7 +225,7 @@ export default class Data {
         },
       },
     });
-    logger.info("Data created successfully");
+    console.info("Data created successfully");
     return this.sendResponse(
       res,
       201,
@@ -292,7 +291,7 @@ export default class Data {
         "User not found"
       );
     }
-    logger.info("Data updated successfully");
+    console.info("Data updated successfully");
     return this.sendResponse(res, 200, "User updated successfully", {
       user: user,
       user_address: address,
@@ -336,7 +335,7 @@ export default class Data {
       where: { id },
     });
 
-    logger.info("Data deleted successfully");
+    console.info("Data deleted successfully");
     return this.sendResponse(
       res,
       200,

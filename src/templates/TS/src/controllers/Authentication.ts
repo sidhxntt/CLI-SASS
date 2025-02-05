@@ -1,3 +1,4 @@
+// Purpose: JWT class to handle token creation and decryption
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
