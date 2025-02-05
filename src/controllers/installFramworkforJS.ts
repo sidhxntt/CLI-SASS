@@ -3,7 +3,7 @@ import { spinner } from "@clack/prompts";
 import * as p from "@clack/prompts";
 import color from "picocolors";
 
-async function installFramwork(packageName: string | unknown, projectName: string) {
+async function installFramworkforJS(packageName: string | unknown, projectName: string) {
   const s = spinner();
   try {
     let command: string;
@@ -13,7 +13,7 @@ async function installFramwork(packageName: string | unknown, projectName: strin
       s.start("Installing Mongo framework...");
     } else if (packageName === "postgres") {
       s.start("Installing...");
-      command = `git clone --single-branch --branch ts-postgres https://github.com/sidhxntt/FlashAPI.git . > /dev/null 2>&1`;
+      command = `git clone --single-branch --branch js-postgres https://github.com/sidhxntt/FlashAPI.git . > /dev/null 2>&1`;
 
       // Wait for the git clone command to finish before stopping the spinner
       const child = spawn(command, {
@@ -66,4 +66,4 @@ async function installFramwork(packageName: string | unknown, projectName: strin
   }
 }
 
-export default installFramwork;
+export default installFramworkforJS;

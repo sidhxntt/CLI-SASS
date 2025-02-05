@@ -1,6 +1,6 @@
 import * as p from "@clack/prompts";
 import { cancelOperation } from "../utils/cancelOperation";
-import selectDB from "./backend_databases";
+import {selectDBforTS, selectDBforJS} from "./backend_databases"
 
 export default async function backend_language(projectName: string) {
   const language = await p.select({
@@ -12,8 +12,10 @@ export default async function backend_language(projectName: string) {
   });
 
   cancelOperation(language);
-  // add here
+
   if (language === "ts") {
-    await selectDB(projectName);
+    await selectDBforTS(projectName);
   }
-}
+  else if(language === 'js'){
+    await selectDBforJS(projectName)
+  }}

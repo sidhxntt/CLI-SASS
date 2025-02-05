@@ -1,8 +1,9 @@
 import * as p from "@clack/prompts";
 import { cancelOperation } from "../utils/cancelOperation";
-import installFramwork from "../controllers/installFramwork";
+import installFramworkforTS from "../controllers/installFramworkforTS";
+import installFramworkforJS from "../controllers/installFramworkforJS";
 
-export default async function selectDB(projectName: string) {
+export async function selectDBforTS(projectName: string) {
   const db = await p.select({
     message: "Pick a language for NodeJS.",
     options: [
@@ -12,5 +13,17 @@ export default async function selectDB(projectName: string) {
   });
 
   cancelOperation(db);
-  installFramwork(db, projectName);
+  installFramworkforTS(db, projectName)
+}
+
+export async function selectDBforJS(projectName: string) {
+  const db = await p.select({
+    message: "Pick a language for NodeJS.",
+    options: [
+      { value: "mongo", label: "MongoDB", hint: "NoSQL" },
+      { value: "postgres", label: "Postgres", hint: "SQL" },
+    ],
+  });
+  installFramworkforJS(db, projectName)
+  cancelOperation(db);
 }
