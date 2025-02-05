@@ -7,10 +7,10 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import GracefulShutdown from "http-graceful-shutdown";
 
-import AllRoutes from "./routes/Main_Routes";
-import error_handling from "./controllers/error";
-import { connectDB, disconnectDB } from "./utils/Prisma";
-import { redis_connection, disconnectRedis } from "./utils/Redis";
+import AllRoutes from "./routes/Main_Routes.js";
+import error_handling from "./controllers/error.js";
+import { redis_connection, disconnectRedis } from "./utils/client/Redis.js";
+import { connectDB, disconnectDB } from "./utils/client/Prisma.js";
 
 dotenv.config();
 

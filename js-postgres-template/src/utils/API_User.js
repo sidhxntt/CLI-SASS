@@ -3,10 +3,10 @@
 // The class also contains methods for sending email and SMS notifications using Bull queues.
 
 import bcrypt from "bcrypt";
-import JWT from "../controllers/Authentication";
+import JWT from "../controllers/Authentication.js";
 import dotenv from "dotenv";
-import Data from "./Data";
-import { emailQueue, smsQueue } from "./Queues";
+import Data from "./Data.js";
+import { emailQueue, smsQueue } from "./client/Queues.js";
 
 dotenv.config();
 

@@ -1,10 +1,10 @@
 // Desc: User routes for the API
 
-import { SubRoutes } from "./Sub_Routes";
-import Data from "../utils/Data";
-import JWT from "../controllers/Authentication";
-import limiter from "../controllers/rate_limitter";
-import { prisma } from "../utils/Prisma";
+import { SubRoutes } from "./Sub_Routes.js";
+import Data from "../utils/Data.js";
+import JWT from "../controllers/Authentication.js";
+import limiter from "../controllers/rate_limitter.js";
+import { prisma } from "../utils/client/Prisma.js";
 
 const createUserRoutes = () => {
   const auth = new JWT()

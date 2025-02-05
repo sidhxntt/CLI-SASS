@@ -1,7 +1,6 @@
 // Purpose: Data class to handle CRUD operations on the database.
 
-import { redis_connection } from "./Redis";
-
+import { redis_connection } from "./client/Redis.js";
 const redis = redis_connection();
 
 export default class Data {

@@ -10,11 +10,11 @@
     "dev:server": "prisma generate && nodemon --exec node ./src/server.js",
     "dev:worker:email": "nodemon --exec node ./src/utils/workers/email.js",
     "dev:worker:sms": "nodemon --exec node ./src/utils/workers/sms.js",
-    "prod:server": "prisma generate && pm2-runtime start ecosystem.config.js",
-    "dockerise" : "docker compose up"
+    "prod:server": "prisma generate && pm2-runtime start ecosystem.config.cjs",
+    "dockerise": "docker compose up"
   },
   "dependencies": {
-    "@prisma/client": "5.18.0",
+    "@prisma/client": "^5.18.0",
     "bcrypt": "^5.1.1",
     "bullmq": "^5.34.10",
     "crypto-js": "^4.2.0",
@@ -35,6 +35,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "nodemon": "^3.1.4",
-    "prisma": "5.18.0"
+    "prisma": "^5.18.0"
   }
 }

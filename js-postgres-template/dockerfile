@@ -6,8 +6,8 @@ COPY . .
 
 RUN npm install 
 RUN npm install -g pm2  
-RUN npm run build
 
+# change this if port number has been changed
 EXPOSE 8000
 
 CMD ["npm", "run", "prod:server" ]

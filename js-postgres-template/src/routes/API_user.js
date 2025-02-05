@@ -1,11 +1,11 @@
 // Init router and user controller
 
-import { SubRoutes } from "./Sub_Routes";
-import User from "../utils/API_User";
-import limiter from "../controllers/rate_limitter";
-import JWT from "../controllers/Authentication";
-import AUTH from "../controllers/Authorisation";
-import { prisma } from "../utils/Prisma";
+import { SubRoutes } from "./Sub_Routes.js";
+import User from "../utils/API_User.js";
+import limiter from "../controllers/rate_limitter.js";
+import JWT from "../controllers/Authentication.js";
+import AUTH from "../controllers/Authorisation.js";
+import { prisma } from "../utils/client/Prisma.js";
 
 
 const createUserRoutes = () => {
