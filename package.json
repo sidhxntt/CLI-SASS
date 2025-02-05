@@ -8,10 +8,10 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@clack/prompts": "^0.7.0"
+    "@clack/prompts": "^0.7.0",
+    "technical_trivia": "^1.0.8"
   },
   "devDependencies": {
-
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
