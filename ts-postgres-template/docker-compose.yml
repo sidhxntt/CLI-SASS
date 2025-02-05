@@ -1,4 +1,4 @@
-# in grafana ui give source as http:pro
+# in grafana ui give source as http://prometheus:9090
 services:
   app:
     build:
@@ -21,7 +21,7 @@ services:
     depends_on:
       - app
 
-
+#  username & password : admin
   grafana:
     image: grafana/grafana-oss
     ports:
