@@ -1,5 +1,5 @@
 {
-  "name": "rishu_ts_template",
+  "name": "ts_template",
   "version": "1.0.0",
   "main": "./src/server.ts",
   "license": "MIT",
@@ -10,19 +10,9 @@
     "dev:server": "prisma generate && nodemon --exec ts-node ./src/server.ts",
     "dev:worker:email": "nodemon --exec ts-node ./src/utils/workers/email.ts",
     "dev:worker:sms": "nodemon --exec ts-node ./src/utils/workers/sms.ts",
-    "prod:server": "prisma generate && pm2-runtime start ecosystem.config.js"
+    "prod:server": "prisma generate && pm2-runtime start ecosystem.config.js",
+    "dockerise" : "docker compose up"
   },
-  "files": [
-    "src",
-    "prisma",
-    "ecosystem.config.js",
-    "package.json",
-    "dockerfile",
-    "docker-compose.yml",
-    ".dockerignore",
-    "prometheus.yml",
-    "tsconfig.json"
-  ],
   "dependencies": {
     "@aws-sdk/client-sns": "^3.731.1",
     "@prisma/client": "5.18.0",
