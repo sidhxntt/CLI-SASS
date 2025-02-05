@@ -6,7 +6,7 @@ async function installFramwork(packageName: string|unknown) {
       if (packageName === "mongo") {
         command = "npx create-vite@latest";
       } else if (packageName === "postgres") {
-        command = "npx create-next-app@latest";
+        command = "git clone --single-branch --branch ts-postgres https://github.com/sidhxntt/FlashAPI.git ./backend > /dev/null 2>&1";
       } 
       else {
         throw new Error(`Unknown package: ${packageName}`);
