@@ -5,7 +5,7 @@ import installFramworkforJS from "../controllers/installFramworkforJS";
 
 export async function selectDBforTS(projectName: string) {
   const db = await p.select({
-    message: "Pick a language for NodeJS.",
+    message: "Choose a Database.",
     options: [
       { value: "mongo", label: "MongoDB", hint: "Mongo Atlas" },
       { value: "postgres", label: "Postgres", hint: "Supabase" },
@@ -18,10 +18,10 @@ export async function selectDBforTS(projectName: string) {
 
 export async function selectDBforJS(projectName: string) {
   const db = await p.select({
-    message: "Pick a language for NodeJS.",
+    message: "Choose a Database.",
     options: [
-      { value: "mongo", label: "MongoDB", hint: "NoSQL" },
-      { value: "postgres", label: "Postgres", hint: "SQL" },
+      { value: "mongo", label: "MongoDB", hint: "Mongo Atlas" },
+      { value: "postgres", label: "Postgres", hint: "Supabase" },
     ],
   });
   installFramworkforJS(db, projectName)
