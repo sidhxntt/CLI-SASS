@@ -1,5 +1,5 @@
 // Seed data for the database
-import {prisma} from "../../src/utils/Prisma"
+import {prisma} from "../../src/utils/Clients/Prisma"
 
 async function main() {
   try {
