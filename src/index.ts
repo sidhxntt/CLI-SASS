@@ -16,6 +16,9 @@ async function main() {
   const projectName = await p.text({
     message: "Name of your project",
     placeholder: "my-app",
+    validate(value) {
+      if (value.length === 0) return `Name is required!`;
+    },
   });
 
   if (p.isCancel(projectName)) {
