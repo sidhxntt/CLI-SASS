@@ -10,18 +10,21 @@ interface FrameworkConfig {
   message: string;
 }
 
-async function installFramworkforTS(packageName: Framework | unknown, projectName: string) {
+async function installFramworkforTS(
+  packageName: Framework | unknown,
+  projectName: string
+) {
   const s = spinner();
-  
+
   const frameworks: Record<Framework, FrameworkConfig> = {
     mongo: {
       branch: "ts-mongo",
-      message: "Installing Typescript MongoDB framework..."
+      message: "Installing Typescript MongoDB framework...",
     },
     postgres: {
       branch: "ts-postgres",
-      message: "Installing Typescript Postgres framework..."
-    }
+      message: "Installing Typescript Postgres framework...",
+    },
   };
 
   try {
@@ -49,23 +52,38 @@ async function installFramworkforTS(packageName: Framework | unknown, projectNam
       child.on("close", (code) => {
         const success = code === 0;
         s.stop(`Installation ${success ? "successful" : "failed"}.`);
-        
-        if (success) {
-          p.note(`Next steps:
-            1. cd ${projectName}/${config.branch}-template
-            2. npm install
-            3. Checkout README.md for manual
 
-            HAPPY CODING ✨✨`);
+        if (success) {
+          const command2 = `rm -rf .git && rm -f .DS_Store &&  cp -rf ${config.branch}-template/ . && rm -rf ${config.branch}-template/`;
+          const refineProcess = spawn(command2, {
+            stdio: "inherit",
+            shell: true,
+          });
+
+          refineProcess.on("close", (refineCode) => {
+            if (refineCode === 0) {
+              p.note(`Next steps:
+                       1. cd ${projectName}/
+                       2. npm install
+                       3. Checkout README.md for manual
+       
+                       HAPPY CODING ✨✨`);
+              resolve();
+            } else {
+              reject(new Error("Refining process failed."));
+            }
+          });
+        } else {
+          reject(new Error(`Process exited with code ${code}`));
         }
-        
-        success ? resolve() : reject(new Error(`Process exited with code ${code}`));
       });
     });
   } catch (error) {
     s.stop("Error during installation.");
     if (error instanceof Error) {
-      p.log.error(color.red(`Failed to install ${packageName}: ${error.message}`));
+      p.log.error(
+        color.red(`Failed to install ${packageName}: ${error.message}`)
+      );
     } else {
       p.log.error(color.red(`Unknown error occurred: ${error}`));
     }

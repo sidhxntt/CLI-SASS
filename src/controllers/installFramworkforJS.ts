@@ -10,7 +10,7 @@ interface FrameworkConfig {
   message: string;
 }
 
-async function installFramworkforJS(packageName: Framework | unknown, projectName: string) {
+async function installFrameworkForJS(packageName: Framework | unknown, projectName: string) {
   const s = spinner();
   
   const frameworks: Record<Framework, FrameworkConfig> = {
@@ -32,9 +32,9 @@ async function installFramworkforJS(packageName: Framework | unknown, projectNam
     const config = frameworks[packageName as Framework];
     s.start(config.message);
 
-    const command = `git clone --single-branch --branch ${config.branch} https://github.com/sidhxntt/FlashAPI.git . > /dev/null 2>&1`;
+    const command1 = `git clone --single-branch --branch ${config.branch} https://github.com/sidhxntt/FlashAPI.git . > /dev/null 2>&1`;
 
-    const child = spawn(command, {
+    const child = spawn(command1, {
       stdio: "inherit",
       shell: true,
     });
@@ -49,21 +49,32 @@ async function installFramworkforJS(packageName: Framework | unknown, projectNam
       child.on("close", (code) => {
         const success = code === 0;
         s.stop(`Installation ${success ? "successful" : "failed"}.`);
-        
-        if (success) {
-          p.note(`Next steps:
-            1. cd ${projectName}/${config.branch}-template
-            2. npm install
-            3. Checkout README.md for manual
 
-            HAPPY CODING ✨✨`);
+        if (success) {
+
+          const command2 = `rm -rf .git && rm -f .DS_Store &&  cp -rf ${config.branch}-template/ . && rm -rf ${config.branch}-template/`;
+          const refineProcess = spawn(command2, { stdio: "inherit", shell: true });
+
+          refineProcess.on("close", (refineCode) => {
+            if (refineCode === 0) {
+              p.note(`Next steps:
+                1. cd ${projectName}/
+                2. npm install
+                3. Checkout README.md for manual
+
+                HAPPY CODING ✨✨`);
+              resolve();
+            } else {
+              reject(new Error("Refining process failed."));
+            }
+          });
+        } else {
+          reject(new Error(`Process exited with code ${code}`));
         }
-        
-        success ? resolve() : reject(new Error(`Process exited with code ${code}`));
       });
     });
   } catch (error) {
-    s.stop("Error during installation.");
+    s.stop(color.red(`Error during installation`));
     if (error instanceof Error) {
       p.log.error(color.red(`Failed to install ${packageName}: ${error.message}`));
     } else {
@@ -73,4 +84,4 @@ async function installFramworkforJS(packageName: Framework | unknown, projectNam
   }
 }
 
-export default installFramworkforJS;
+export default installFrameworkForJS;

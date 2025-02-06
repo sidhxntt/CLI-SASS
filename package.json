@@ -2,12 +2,13 @@
   "name": "coderush",
   "version": "1.0.0",
   "bin": {
-    "coderush": "./src/index.ts"
+    "coderush": "./dist/index.js"
   },
   "license": "MIT",
   "scripts": {
-    "start": "ts-node ./src/index.ts",
-    "install": "echo 'This package is only meant to be used with npx' && exit 1"
+    "dev": "ts-node ./src/index.ts",
+    "prod": "node ./dist/index.",
+    "build": "tsc"
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0"
