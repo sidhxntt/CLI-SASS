@@ -6,7 +6,6 @@
   "scripts": {
     "seed": "ts-node prisma/seeding/data.ts",
     "build": "tsc",
-    "sync-db": "npm prisma migrate dev --name migration_1",
     "dev:server": "prisma generate && nodemon --exec ts-node ./src/server.ts",
     "dev:worker:email": "nodemon --exec ts-node ./src/utils/workers/email.ts",
     "dev:worker:sms": "nodemon --exec ts-node ./src/utils/workers/sms.ts",
