@@ -1,7 +1,7 @@
 {
-  "name": "cli_sass",
+  "name": "coderush",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "./src/index.ts",
   "license": "MIT",
   "scripts": {
     "start": "ts-node ./src/index.ts",

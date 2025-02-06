@@ -8,7 +8,7 @@ export default async function selectProjectType(projectName: string) {
     options: [
       { value: "frontend", label: "Frontend" },
       { value: "backend", label: "Backend" },
-      { value: "both", label: "both", hint: "recommneded" },
+      { value: "both", label: "Both", hint: "recommneded" },
     ],
   });
 

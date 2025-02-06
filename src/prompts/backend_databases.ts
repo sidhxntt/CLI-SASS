@@ -7,8 +7,8 @@ export async function selectDBforTS(projectName: string) {
   const db = await p.select({
     message: "Pick a language for NodeJS.",
     options: [
-      { value: "mongo", label: "MongoDB", hint: "NoSQL" },
-      { value: "postgres", label: "Postgres", hint: "SQL" },
+      { value: "mongo", label: "MongoDB", hint: "Mongo Atlas" },
+      { value: "postgres", label: "Postgres", hint: "Supabase" },
     ],
   });
 

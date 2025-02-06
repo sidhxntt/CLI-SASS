@@ -3,68 +3,73 @@ import { spinner } from "@clack/prompts";
 import * as p from "@clack/prompts";
 import color from "picocolors";
 
-async function installFramworkforJS(packageName: string | unknown, projectName: string) {
+type Framework = "mongo" | "postgres";
+
+interface FrameworkConfig {
+  branch: string;
+  message: string;
+}
+
+async function installFramworkforJS(packageName: Framework | unknown, projectName: string) {
   const s = spinner();
+  
+  const frameworks: Record<Framework, FrameworkConfig> = {
+    mongo: {
+      branch: "js-mongo",
+      message: "Installing Javascript MongoDB framework..."
+    },
+    postgres: {
+      branch: "js-postgres",
+      message: "Installing Javascript Postgres framework..."
+    }
+  };
+
   try {
-    let command: string;
+    if (typeof packageName !== "string" || !(packageName in frameworks)) {
+      throw new Error(`Unknown package: ${packageName}`);
+    }
 
-    if (packageName === "mongo") {
-      command = "npx create-vite@latest";
-      s.start("Installing Mongo framework...");
-    } else if (packageName === "postgres") {
-      s.start("Installing...");
-      command = `git clone --single-branch --branch js-postgres https://github.com/sidhxntt/FlashAPI.git . > /dev/null 2>&1`;
+    const config = frameworks[packageName as Framework];
+    s.start(config.message);
 
-      // Wait for the git clone command to finish before stopping the spinner
-      const child = spawn(command, {
-        stdio: "inherit", // Directly use the parent process's stdin, stdout, and stderr
-        shell: true, // Use shell to handle command-line parsing and environment
+    const command = `git clone --single-branch --branch ${config.branch} https://github.com/sidhxntt/FlashAPI.git . > /dev/null 2>&1`;
+
+    const child = spawn(command, {
+      stdio: "inherit",
+      shell: true,
+    });
+
+    await new Promise<void>((resolve, reject) => {
+      child.on("error", (err) => {
+        s.stop("Error during installation.");
+        p.log.error(color.red(`Error: ${err.message}`));
+        reject(err);
       });
 
       child.on("close", (code) => {
-        s.stop(`Installation ${code === 0 ? "successful" : "failed"}.`);
-        if (code === 0) {
+        const success = code === 0;
+        s.stop(`Installation ${success ? "successful" : "failed"}.`);
+        
+        if (success) {
           p.note(`Next steps:
-            1. cd ${projectName}/ts-postgres-template
+            1. cd ${projectName}/${config.branch}-template
             2. npm install
             3. Checkout README.md for manual
 
             HAPPY CODING ✨✨`);
-        } else {
-          p.log.error(color.red("There was an error during installation."));
         }
+        
+        success ? resolve() : reject(new Error(`Process exited with code ${code}`));
       });
-
-      child.on("error", (err) => {
-        s.stop("Error during installation.");
-        p.log.error(color.red(`Error: ${err.message}`));
-      });
-
-      return; // Return early since we're handling this command asynchronously
-    } else {
-      throw new Error(`Unknown package: ${packageName}`);
-    }
-
-    // Handle the spawn command for Mongo (if it's not "postgres")
-    const child = spawn(command, {
-      stdio: "inherit", // Directly use the parent process's stdin, stdout, and stderr
-      shell: true, // Use shell to handle command-line parsing and environment
-    });
-
-    child.on("error", (err) => {
-      s.stop("Error during installation.");
-      p.log.error(color.red(`Error: ${err.message}`));
-    });
-
-    child.on("close", (code) => {
-      s.stop(`Installation ${code === 0 ? "successful" : "failed"}.`);
     });
   } catch (error) {
     s.stop("Error during installation.");
     if (error instanceof Error) {
       p.log.error(color.red(`Failed to install ${packageName}: ${error.message}`));
+    } else {
+      p.log.error(color.red(`Unknown error occurred: ${error}`));
     }
-    p.log.error(color.red(`Unknown error occurred: ${error}`));
+    throw error; // Re-throw to allow caller to handle error
   }
 }
 
